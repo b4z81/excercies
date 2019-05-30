@@ -5,8 +5,8 @@ import WeahterCard from './components/weatherCard/weatherCard';
 class App extends React.Component {
     render() {
         return (
-            <section class="content">
-                <div class="cards">
+            <section className="content">
+                <div className="cards">
                     <WeahterCard />
                 </div>
             </section>

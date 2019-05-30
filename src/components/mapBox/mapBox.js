@@ -7,6 +7,11 @@ const mapStyles = {
 };
 
 export class MapBox extends Component {
+    constructor(props){
+        super(props)
+        console.log(this.props);
+    }
+
     render() {
         return (
             <Map
@@ -14,15 +19,15 @@ export class MapBox extends Component {
                 zoom={14}
                 style={mapStyles}
                 initialCenter={{
-                    lat: -1.2884,
-                    lng: 36.8233
+                    lat: this.props.location.lat,
+                    lng: this.props.location.lng
                 }}>
-                <Marker position={{ lat: 48.00, lng: -122.00 }} />
+                <Marker position={{ lat: this.props.location.lat, lng: this.props.location.lng }} />
             </Map>
         );
     }
 }
 
 export default GoogleApiWrapper({
-    apiKey: ''
+    apiKey: 'AIzaSyD_yHhu7UUwggb4aKzulYJkSIe3osy9NzQ'
 })(MapBox);

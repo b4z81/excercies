@@ -1,6 +1,7 @@
 import React from 'react';
 import './weatherCard.scss';
 import MapBox from '../mapBox/mapBox';
+import logo from '../../images/icons/04n.svg';
 
 const apiKey = 'bc7d98df81a8ca950c00046fd18c66a0';
 
@@ -31,7 +32,7 @@ class WeatherCard extends React.Component {
                     }
                 });
 
-                fetch(`http://api.openweathermap.org/data/2.5/forecast?units=metric&lat=${this.state.currentLocation.lat}&lon=${this.state.currentLocation.lng}&appid=${apiKey}`)
+                fetch(`http://api.openweathermap.org/data/2.5/forecast?lang=it&units=metric&lat=${this.state.currentLocation.lat}&lon=${this.state.currentLocation.lng}&appid=${apiKey}`)
                 .then(response => response.json())
                 .then(data => 
                     this.setState({
@@ -52,9 +53,11 @@ class WeatherCard extends React.Component {
                                 {this.state.weather.city.name}
                             </h3>
                             <img alt="" src={`../images/icons/${this.state.weather.list[0].weather[0].icon}.svg`} className="weatherCard__icon" />
+                            <img alt="" src={logo} className="weatherCard__icon" />
                             <h4>
                                 {this.state.weather.list[0].main.temp}°
                             </h4>
+                            <p>{this.state.weather.list[0].weather[0].description}</p>
                             <p>Humidity: {this.state.weather.list[0].main.humidity}%</p>
                         </div>
                         <ul className="weatherCard__week">

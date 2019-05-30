@@ -2,16 +2,14 @@ import React from 'react';
 import './weatherCard.scss';
 import MapBox from '../mapBox/mapBox';
 
+const apiKey = 'bc7d98df81a8ca950c00046fd18c66a0';
+
 class WeatherCard extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            data: null,
-            weather: {
-                city: undefined,
-                list: {}
-            },
+            weather: {},
             currentLocation: {
                 lat: undefined,
                 lng: undefined,
@@ -19,7 +17,9 @@ class WeatherCard extends React.Component {
             isLoading: true,
             error: null
         };
+    }
 
+    componentDidMount(){
         if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async pos => {
                 const coords = pos.coords;
@@ -31,13 +31,13 @@ class WeatherCard extends React.Component {
                     }
                 });
 
-                fetch(`/forecast?lat=${this.state.currentLocation.lat}&lon=${this.state.currentLocation.lng}&appid=bc7d98df81a8ca950c00046fd18c66a0`)
+                fetch(`http://api.openweathermap.org/data/2.5/forecast?units=metric&lat=${this.state.currentLocation.lat}&lon=${this.state.currentLocation.lng}&appid=${apiKey}`)
                 .then(response => response.json())
-                .then(data => this.setState({
-                    data,
-                    isLoading: false 
-                }))
-                .catch(error => this.setState({ error, isLoading: false }));
+                .then(data => 
+                    this.setState({
+                        weather: data,
+                        isLoading: false}))
+                .catch(error => this.setState({ error, isLoading: false }))
             });
         }
     }
@@ -49,20 +49,17 @@ class WeatherCard extends React.Component {
                     <div className="weatherCard__side weatherCard__side--front weatherCard__side--front-1">
                         <div className="weatherCard__description">
                             <h3>
-                                {this.state.weather.city}
+                                {this.state.weather.city.name}
                             </h3>
-                            <p>
-                                <img alt="" src="../../images/weather/Cloud.svg" />
-                            </p>
+                            <img alt="" src={`../images/icons/${this.state.weather.list[0].weather[0].icon}.svg`} className="weatherCard__icon" />
                             <h4>
                                 {this.state.weather.list[0].main.temp}°
                             </h4>
-                            <p>Feels like:</p>
                             <p>Humidity: {this.state.weather.list[0].main.humidity}%</p>
                         </div>
                         <ul className="weatherCard__week">
                             {this.state.weather.list.map((value, index) => {
-                                return <li key={index}>{value.dt_txt} {value.weather.icon} {value.main.temp_max} {value.main.temp_min}</li>
+                                return <li key={index}>{value.dt_txt} {value.weather[0].icon} {value.main.temp_max} {value.main.temp_min}</li>
                             })}
                         </ul>
                     </div>

@@ -2,7 +2,6 @@
   "name": "excercies-app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://api.openweathermap.org/data/2.5",
   "dependencies": {
     "google-maps-react": "^2.0.2",
     "node-sass": "^4.12.0",

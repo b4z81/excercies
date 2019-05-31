@@ -1,6 +1,7 @@
 import React from 'react';
 import './weatherCard.scss';
 import MapBox from '../mapBox/mapBox';
+import Moment from 'moment';
 import logo from '../../images/icons/04n.svg';
 
 const apiKey = 'bc7d98df81a8ca950c00046fd18c66a0';
@@ -44,6 +45,7 @@ class WeatherCard extends React.Component {
     }
 
     render() {
+        Moment.locale('it');
         if(!this.state.isLoading) {
             return (
                 <div className="weatherCard">
@@ -55,14 +57,29 @@ class WeatherCard extends React.Component {
                             <img alt="" src={`../images/icons/${this.state.weather.list[0].weather[0].icon}.svg`} className="weatherCard__icon" />
                             <img alt="" src={logo} className="weatherCard__icon" />
                             <h4>
-                                {this.state.weather.list[0].main.temp}°
+                                {this.state.weather.list[0].main.temp.toFixed(0)}°
                             </h4>
                             <p>{this.state.weather.list[0].weather[0].description}</p>
                             <p>Humidity: {this.state.weather.list[0].main.humidity}%</p>
                         </div>
                         <ul className="weatherCard__week">
                             {this.state.weather.list.map((value, index) => {
-                                return <li key={index}>{value.dt_txt} {value.weather[0].icon} {value.main.temp_max} {value.main.temp_min}</li>
+                                if((index % 8) === 0) {
+                                    const day = value.dt_txt;
+                                    return (
+                                        <li key={index}>
+                                            <span>
+                                                {Moment(day).format('L')} 
+                                            </span>
+                                            <span>
+                                                {value.weather[0].icon} 
+                                            </span>
+                                            <span>
+                                                {value.main.temp_max} {value.main.temp_min}
+                                            </span>
+                                        </li>
+                                    )
+                                }
                             })}
                         </ul>
                     </div>

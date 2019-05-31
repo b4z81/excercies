@@ -7,10 +7,6 @@ const mapStyles = {
 };
 
 export class MapBox extends Component {
-    constructor(props){
-        super(props)
-    }
-
     render() {
         return (
             <Map

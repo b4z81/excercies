@@ -1,0 +1,25 @@
+.weatherWeek {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    list-style: none;
+    &__box {
+      display: flex;
+      padding: 10px;
+      flex-direction: column;
+      font-size: 14px;
+      &--current {
+        background-color: rgba(247, 248, 250, 0.18);
+        border: 1px solid #c69887;
+        border-radius: 12px;
+      }
+    }
+    &__day {
+      text-transform: uppercase;
+    }
+  }
+  

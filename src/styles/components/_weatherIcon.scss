@@ -1,0 +1,38 @@
+.weatherIcon {
+    display: block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    &--big {
+      height: 100px;
+    }
+    &--medium {
+      height: 50px;
+    }
+    &--01d,
+    &--01n {
+      background-image: url("images/icons/01d.svg");
+    }
+    &--02d,
+    &--02n,
+    &--03d,
+    &--03n {
+      background-image: url("images/icons/03d.svg");
+    }
+    &--04d,
+    &--04n {
+      background-image: url("images/icons/04d.svg");
+    }
+    &--09d,
+    &--09n {
+      background-image: url("images/icons/09d.svg");
+    }
+    &--11d,
+    &--11n {
+      background-image: url("images/icons/11d.svg");
+    }
+    &--13d,
+    &--13n {
+      background-image: url("images/icons/13d.svg");
+    }
+  }

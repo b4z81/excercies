@@ -51,7 +51,9 @@ class App extends React.Component {
                 },
                 isLoading: false
             });
-        },error => window.alert(error.message));
+        }
+        , error => window.alert(error.message)
+        , {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
     }
 }
 
